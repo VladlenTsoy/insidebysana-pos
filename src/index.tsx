@@ -1,5 +1,4 @@
 import React from "react"
-import ReactDOM from "react-dom"
 import reportWebVitals from "./reportWebVitals"
 import App from "./App"
 import {Provider} from "react-redux"
@@ -8,19 +7,22 @@ import {locale} from "moment"
 import "moment/locale/ru"
 import {ConfigProvider} from "antd"
 import ruRU from "antd/es/locale-provider/ru_RU"
+import {createRoot} from "react-dom/client"
 
 locale("ru")
 
-ReactDOM.render(
+const container = document.getElementById("root")
+const root = createRoot(container!)
+root.render(
     <React.StrictMode>
         <Provider store={store}>
             <ConfigProvider locale={ruRU}>
-                <App/>
+                <App />
             </ConfigProvider>
         </Provider>
-    </React.StrictMode>,
-    document.getElementById("root")
+    </React.StrictMode>
 )
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

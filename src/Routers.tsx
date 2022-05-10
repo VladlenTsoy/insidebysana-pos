@@ -3,7 +3,7 @@ import "./App.less"
 import {useDispatch} from "./store"
 import Loader from "components/blocks/loader/Loader"
 import {useUser} from "auth/authSlice"
-import {Route} from "react-router-dom"
+import {Route, Routes} from "react-router-dom"
 import {fetchUser} from "auth/authApi"
 import Layout from "./layouts/Layout"
 import LoadingBlock from "components/blocks/loading-block/LoadingBlock"
@@ -25,18 +25,20 @@ const Routers: React.FC = () => {
         }
     }, [dispatch, token])
 
-    if (!!token && loading) return <Loader text="Загрузка доступа..."/>
+    if (!!token && loading) return <Loader text="Загрузка доступа..." />
     return (
-        <React.Suspense fallback={<Loader text="Загрузка доступа..."/>}>
+        <React.Suspense fallback={<Loader text="Загрузка доступа..." />}>
             {detail ? (
                 <Layout>
-                    <React.Suspense fallback={<LoadingBlock title="Загрузка..."/>}>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/orders" element={<Orders/>}/>
+                    <React.Suspense fallback={<LoadingBlock title="Загрузка..." />}>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/orders" element={<Orders />} />
+                        </Routes>
                     </React.Suspense>
                 </Layout>
             ) : (
-                <Auth/>
+                <Auth />
             )}
         </React.Suspense>
     )
