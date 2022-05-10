@@ -1,0 +1,67 @@
+@import "~antd/dist/antd.dark.less";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap");
+
+body *::-webkit-scrollbar {
+    display: none;
+}
+
+body * {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+span.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ant-form-item .ant-input-number-handler-wrap,
+.ant-input-number-handler-wrap {
+    display: none;
+}
+
+//
+.account-item {
+    user-select: none;
+
+    &.ant-dropdown-menu-item {
+        padding: 0.5rem 3rem 0.5rem 1rem;
+        font-size: @font-size-base;
+    }
+
+    > div > span.anticon,
+    span.anticon:first-child {
+        font-size: @font-size-xl;
+        background: @layout-body-background;
+        padding: 0.5rem;
+        border-radius: 50%;
+        margin-right: 0.75rem;
+
+        &.invert {
+            filter: invert(100%);
+        }
+    }
+
+    .ant-badge {
+        margin-right: 0.75rem;
+
+        span.anticon {
+            margin-right: 0;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.price-list {
+    border-bottom: 1px solid @border-color-base;
+    padding-bottom: 1rem;
+
+    .price-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: @font-size-xl;
+
+        span:first-child {
+            color: @text-color-secondary;
+        }
+
+        .payChange {
+            &.success {
+                color: @success-color;
+            }
+
+            &.error {
+                color: @error-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,76 @@
+.create-order-drawer {
+    .ant-drawer-body {
+        padding: 0;
+    }
+}
+
+.create-order {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .header {
+        height: 55px;
+        border-bottom: 1px solid @border-color-base;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+        font-size: @font-size-lg;
+
+        .title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .back {
+            padding: 0 1rem;
+            .anticon {
+                margin-right: 0.5rem;
+            }
+        }
+
+        .close {
+            padding: 0 1rem;
+        }
+    }
+
+    .container {
+        height: 100%;
+        gap: 1rem;
+        display: grid;
+        grid-template-columns: 1fr 350px;
+        overflow: hidden;
+
+        .create-order-form {
+            overflow: auto;
+            height: 100%;
+            padding: 1rem 0 1rem 1rem;
+        }
+
+        .finish-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            overflow: auto;
+            padding: 1rem 1rem 1rem 0;
+
+            .cart-details {
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                flex: 1 1;
+                overflow: hidden;
+            }
+        }
+    }
+}

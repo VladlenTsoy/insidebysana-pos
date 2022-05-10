@@ -1,0 +1,75 @@
+.cart-product-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: @black;
+
+    .details {
+        overflow: visible;
+        width: 187px;
+        position: relative;
+
+        span.ripple {
+            animation: ripple 450ms linear;
+            background-color: rgba(131, 131, 131, 0.1);
+        }
+    }
+
+    .title {
+        font-weight: 500;
+        line-height: 1.2;
+        overflow: hidden;
+        min-width: 0;
+        margin-bottom: 0.25rem;
+    }
+
+    .price-size {
+        font-size: @font-size-sm;
+
+        .price-block {
+            line-height: normal;
+            font-size: @font-size-base;
+            color: fade(@black, 40%);
+            font-weight: bold;
+            display: inline-block;
+            margin-right: .5rem;
+        }
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+.plus-minus-input {
+    display: flex;
+    align-items: center;
+    z-index: 12;
+
+    .count {
+        font-size: @font-size-big;
+        width: 35px;
+        text-align: center;
+    }
+
+    .plus,
+    .minus {
+        width: 40px;
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: @font-size-big;
+            background: @success-color;
+            width: 40px;
+            height: 40px;
+            color: @white;
+        }
+
+        .btn-danger {
+            background-color: @error-color;
+        }
+    }
+}
