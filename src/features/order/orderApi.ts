@@ -47,7 +47,7 @@ export const orderApi = createApi({
         }),
         createOrder: build.mutation<OrderTableColumn, Partial<AgrProps>>({
             query: body => ({
-                url: `user/cashier/order`,
+                url: `user/cashier/pos/order`,
                 method: "POST",
                 body
             }),
