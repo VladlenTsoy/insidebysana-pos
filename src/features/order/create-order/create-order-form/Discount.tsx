@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons"
 import {Button, InputNumber, Radio} from "antd"
 import {setDiscount, useCartParams} from "features/cart/cartSlice"
-import {useDispatch} from "../../../../store"
+import {useDispatch} from "store"
 import React from "react"
 import {formatPrice} from "utils/formatPrice"
 import "./Discount.less"
