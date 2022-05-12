@@ -94,10 +94,9 @@ module.exports = {
         },
         {
             plugin: interpolateHtml,
-            // Enter the variable to be interpolated in the html file
             options: {
-                TITLE: "InsideBySana CRM: Панель администрирования",
-                DESCRIPTION: "InsideBySana CRM: Панель администрирования",
+                TITLE: "InsideBySana POS-система",
+                DESCRIPTION: "InsideBySana POS-система",
                 MANIFEST: "manifest.json",
                 HEAD_TAGS: ""
             }
