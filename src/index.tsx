@@ -7,20 +7,19 @@ import {locale} from "moment"
 import "moment/locale/ru"
 import {ConfigProvider} from "antd"
 import ruRU from "antd/es/locale-provider/ru_RU"
-import {createRoot} from "react-dom/client"
+import ReactDOM from "react-dom"
 
 locale("ru")
 
-const container = document.getElementById("root")
-const root = createRoot(container!)
-root.render(
+ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <ConfigProvider locale={ruRU}>
                 <App />
             </ConfigProvider>
         </Provider>
-    </React.StrictMode>
+    </React.StrictMode>,
+    document.getElementById("root")
 )
 
 // If you want to start measuring performance in your app, pass a function

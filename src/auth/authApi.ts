@@ -1,30 +1,47 @@
 import {createAsyncThunk} from "@reduxjs/toolkit"
-import {apiRequest} from "utils/api"
+import {DOMAIN_API, request} from "utils/api"
 import {ThunkProps} from "../store"
 import {User} from "types/User"
-import {getCookie, removeCookie} from "utils/cookie"
+import {getCookie} from "utils/cookie"
+
+interface AuthUserResponseType {
+    token: string
+}
+
+interface AuthUserParamProps {
+    email: string
+    password: string
+}
 
 // Авторизация пользователя
-export const authUser = createAsyncThunk<
-    {
-        token: string
-    },
-    {
-        email: string
-        password: string
-    },
-    ThunkProps
->("user/auth", async (data, {signal}) => {
-    return await apiRequest("post", `login`, {data: {...data}, signal, type: "guest"})
-})
+export const authUser = createAsyncThunk<AuthUserResponseType, AuthUserParamProps, ThunkProps>(
+    "user/auth",
+    async (data, {signal}) => {
+        return request<AuthUserResponseType>(DOMAIN_API + "/login", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+            signal
+        })
+    }
+)
 
 // Вывод пользователя
 export const fetchUser = createAsyncThunk<User, undefined, ThunkProps>(
     "user/fetch",
-    async (_, {signal}) => {
-        return (await apiRequest("get", `/`, {signal}).catch(e => {
-            if (e.message === "error_token") removeCookie("crm_token_access")
-        })) as User
+    async (_, {signal, getState}) => {
+        const {auth} = getState()
+        return request<User>(DOMAIN_API + "/user", {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + auth.token
+            },
+            signal
+        })
     },
     {
         condition(_) {
@@ -34,13 +51,23 @@ export const fetchUser = createAsyncThunk<User, undefined, ThunkProps>(
     }
 )
 
+interface LogoutAuthResponseType {
+    status: "success"
+}
+
 // Завершения сеанса
-export const logoutUser = createAsyncThunk<
-    {
-        status: "success"
-    },
-    undefined,
-    ThunkProps
->("user/logout", async (_, {signal}) => {
-    return await apiRequest("delete", `logout`, {signal})
-})
+export const logoutUser = createAsyncThunk<LogoutAuthResponseType, undefined, ThunkProps>(
+    "user/logout",
+    async (_, {signal, getState}) => {
+        const {auth} = getState()
+        return request<LogoutAuthResponseType>(DOMAIN_API + "/user/logout", {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + auth.token
+            },
+            signal
+        })
+    }
+)

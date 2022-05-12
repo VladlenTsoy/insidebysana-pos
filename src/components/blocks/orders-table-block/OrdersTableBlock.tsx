@@ -45,6 +45,7 @@ const OrdersTableBlock: React.FC<OrdersTableBlockProps> = ({
         <div className="orders-table-blocks">
             {!!onChangeHandler && (
                 <div className="header">
+                    {/*@ts-ignore*/}
                     <RangePicker
                         size="large"
                         onChange={onChangeHandler}

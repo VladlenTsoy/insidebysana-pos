@@ -3,25 +3,22 @@ import {message} from "antd"
 import {getCookie, removeCookie, setCookie} from "./cookie"
 
 const CancelToken = axios.CancelToken
-const DOMAIN_API =
+export const DOMAIN_API =
     process.env.NODE_ENV === "production" ? "https://insidebysana-api.herokuapp.com/api" : "http://localhost:9000/api"
 
-const isSite = process.env.REACT_APP_BUILD_TARGET === "site"
-const TOKEN_NAME = isSite ? "site_token_access" : "crm_token_access"
+const TOKEN_NAME = "crm_token_access"
 const TOKEN = getCookie(TOKEN_NAME)
 
 export const api = {
     token: TOKEN || null,
     guest: axios.create({
         baseURL: DOMAIN_API,
-        // @ts-ignore
-        headers: {common: {Authorization: "Bearer " + TOKEN}},
+        headers: {Authorization: "Bearer " + TOKEN},
         withCredentials: true
     }),
     user: axios.create({
-        baseURL: DOMAIN_API + (isSite ? "/client" : "/user"),
-        // @ts-ignore
-        headers: {common: {Authorization: "Bearer " + TOKEN}},
+        baseURL: DOMAIN_API + "user",
+        headers: {Authorization: "Bearer " + TOKEN},
         withCredentials: true
     })
 }
@@ -88,4 +85,28 @@ export const apiRequest: ApiRequestProps = async (method = "get", url: string, c
             }
         }
     }
+}
+
+
+export const request = async <T>(
+    url: string,
+    config: RequestInit = {}
+): Promise<T> => {
+    return fetch(url, config)
+        .then(async (response) => {
+            if (!response.ok) throw response
+            return response.json()
+        })
+        .catch(async (e) => {
+            const data = await e.json()
+            if (e.status === 401)
+                await message.error("Ошибка токена!")
+            else if (e.status === 422) {
+                data.errors.map((error: any) => message.error(error.msg))
+            } else {
+                message.error(data?.message || e?.message || "Неизвестная ошибка!")
+            }
+            throw Error(data?.message || e?.message || "Неизвестная ошибка!")
+        })
+        .then((data) => data as T)
 }

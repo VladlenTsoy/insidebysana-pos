@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit"
 import {ThunkProps} from "../../store"
-import {apiRequest} from "utils/api"
+import {DOMAIN_API, request} from "utils/api"
 import {ProductCardType} from "features/product/product"
 
 type ReturnedType = {
@@ -18,14 +18,24 @@ type AgrsProps = {
 export const fetchProductColorBySearch = createAsyncThunk<ReturnedType, AgrsProps, ThunkProps>(
     "product-color/fetch",
     async ({search = "", categoryId = 0, sizeId = 0, currentPage = 0}, {signal, getState}) => {
-        const {
-            pagination: {limit}
-        } = getState().product
+        const {product, auth} = getState()
+        const {pagination: {limit}} = product
 
-        return await apiRequest("post", `cashier/search-products`, {
-            data: {search, categoryId, sizeId, currentPage, limit},
+        return request<ReturnedType>(DOMAIN_API + "/user/cashier/search-products", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + auth.token
+            },
+            body: JSON.stringify({search, categoryId, sizeId, currentPage, limit}),
             signal
         })
+
+        // return await apiRequest("post", `cashier/search-products`, {
+        //     data: {search, categoryId, sizeId, currentPage, limit},
+        //     signal
+        // })
     },
     {
         condition: (_, {getState}) => {
