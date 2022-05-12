@@ -28,9 +28,9 @@ const GridProducts: React.FC = () => {
 
     useEffect(() => {
         const promise = dispatch(fetchProductColorBySearch({sizeId, categoryId, search}))
-        return () => {
-            promise.abort()
-        }
+        // return () => {
+        //     promise.abort()
+        // }
     }, [dispatch, sizeId, categoryId, search])
 
     return (
