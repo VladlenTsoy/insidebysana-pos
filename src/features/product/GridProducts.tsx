@@ -33,6 +33,7 @@ const GridProducts: React.FC = () => {
         }
     }, [dispatch, sizeId, categoryId, search])
 
+    console.error(currentPage === 0, loading)
     return (
         <div className="search-container" onScroll={onScrollHandler}>
             <AnimatePresence>
@@ -50,17 +51,17 @@ const GridProducts: React.FC = () => {
                         </div>
                     </motion.div>
                 )}
-                {!loading && !products.length && (
-                    <motion.div
-                        animate={{opacity: 1}}
-                        initial={{opacity: 0}}
-                        exit={{opacity: 0}}
-                        transition={{duration: 0.5}}
-                        key="empty"
-                    >
-                        <Empty />
-                    </motion.div>
-                )}
+                {/*{!loading && !products.length && (*/}
+                {/*    <motion.div*/}
+                {/*        animate={{opacity: 1}}*/}
+                {/*        initial={{opacity: 0}}*/}
+                {/*        exit={{opacity: 0}}*/}
+                {/*        transition={{duration: 0.5}}*/}
+                {/*        key="empty"*/}
+                {/*    >*/}
+                {/*        <Empty />*/}
+                {/*    </motion.div>*/}
+                {/*)}*/}
                 {!!products.length && (
                     <motion.div
                         id="grid-products-list"

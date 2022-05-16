@@ -27,12 +27,30 @@
     .products-container {
         display: grid;
         gap: 1rem;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    @media (max-width: 1600px) {
+        .products-container {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
     }
 
     @media (max-width: 1200px) {
         .products-container {
             grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .products-container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .products-container {
+            grid-template-columns: 1fr 1fr;
         }
     }
 
