@@ -37,31 +37,31 @@ const GridProducts: React.FC = () => {
     return (
         <div className="search-container" onScroll={onScrollHandler}>
             <AnimatePresence>
-                {currentPage === 0 && loading && (
-                    <motion.div
-                        animate={{opacity: 1}}
-                        initial={{opacity: 0}}
-                        exit={{opacity: 0}}
-                        transition={{duration: 0.5}}
-                        key="loading-first"
-                    >
-                        <div className="loading-first">
-                            <Spin indicator={<LoadingOutlined style={{marginBottom: "1rem"}} />} />
-                            <p>Загрузка...</p>
-                        </div>
-                    </motion.div>
-                )}
-                {/*{!loading && !products.length && (*/}
+                {/*{currentPage === 0 && loading && (*/}
                 {/*    <motion.div*/}
                 {/*        animate={{opacity: 1}}*/}
                 {/*        initial={{opacity: 0}}*/}
                 {/*        exit={{opacity: 0}}*/}
                 {/*        transition={{duration: 0.5}}*/}
-                {/*        key="empty"*/}
+                {/*        key="loading-first"*/}
                 {/*    >*/}
-                {/*        <Empty />*/}
+                {/*        <div className="loading-first">*/}
+                {/*            <Spin indicator={<LoadingOutlined style={{marginBottom: "1rem"}} />} />*/}
+                {/*            <p>Загрузка...</p>*/}
+                {/*        </div>*/}
                 {/*    </motion.div>*/}
                 {/*)}*/}
+                {!loading && !products.length && (
+                    <motion.div
+                        animate={{opacity: 1}}
+                        initial={{opacity: 0}}
+                        exit={{opacity: 0}}
+                        transition={{duration: 0.5}}
+                        key="empty"
+                    >
+                        <Empty />
+                    </motion.div>
+                )}
                 {!!products.length && (
                     <motion.div
                         id="grid-products-list"
