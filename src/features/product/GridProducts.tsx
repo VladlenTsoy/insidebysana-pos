@@ -2,7 +2,7 @@ import {Empty, Spin} from "antd"
 import React, {useEffect} from "react"
 import {useGetParamsProduct, useProductColors} from "features/product/productSlice"
 import "./GridProducts.less"
-import {motion, AnimatePresence} from "framer-motion"
+import {motion} from "framer-motion"
 import {useDispatch} from "../../store"
 import ProductCard from "./ProductCard"
 import {fetchProductColorBySearch} from "./fetchProductColorBySearch"
@@ -33,24 +33,23 @@ const GridProducts: React.FC = () => {
         }
     }, [dispatch, sizeId, categoryId, search])
 
-    console.error(currentPage === 0, loading)
     return (
         <div className="search-container" onScroll={onScrollHandler}>
-            <AnimatePresence>
-                {/*{currentPage === 0 && loading && (*/}
-                {/*    <motion.div*/}
-                {/*        animate={{opacity: 1}}*/}
-                {/*        initial={{opacity: 0}}*/}
-                {/*        exit={{opacity: 0}}*/}
-                {/*        transition={{duration: 0.5}}*/}
-                {/*        key="loading-first"*/}
-                {/*    >*/}
-                {/*        <div className="loading-first">*/}
-                {/*            <Spin indicator={<LoadingOutlined style={{marginBottom: "1rem"}} />} />*/}
-                {/*            <p>Загрузка...</p>*/}
-                {/*        </div>*/}
-                {/*    </motion.div>*/}
-                {/*)}*/}
+            <>
+                {currentPage === 0 && loading && (
+                    <motion.div
+                        animate={{opacity: 1}}
+                        initial={{opacity: 0}}
+                        exit={{opacity: 0}}
+                        transition={{duration: 0.5}}
+                        key="loading-first"
+                    >
+                        <div className="loading-first">
+                            <Spin indicator={<LoadingOutlined style={{marginBottom: "1rem"}} />} />
+                            <p>Загрузка...</p>
+                        </div>
+                    </motion.div>
+                )}
                 {!loading && !products.length && (
                     <motion.div
                         animate={{opacity: 1}}
@@ -105,7 +104,7 @@ const GridProducts: React.FC = () => {
                         </div>
                     </motion.div>
                 )}
-            </AnimatePresence>
+            </>
         </div>
     )
 }
