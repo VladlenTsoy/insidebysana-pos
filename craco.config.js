@@ -32,16 +32,16 @@ module.exports = {
                     }
                 }
             return webpackConfig
-        },
-        plugins: [...(
-            isEnvProduction ? [
-                new CompressionPlugin({
-                    filename: "[path].gz[query]",
-                    algorithm: "gzip",
-                    test: /\.(js|css)$/
-                })
-            ] : []
-        )]
+        }
+        // plugins: [...(
+        //     isEnvProduction ? [
+        //         new CompressionPlugin({
+        //             filename: "[path].gz[query]",
+        //             algorithm: "gzip",
+        //             test: /\.(js|css)$/
+        //         })
+        //     ] : []
+        // )]
     },
     plugins: [
         {
