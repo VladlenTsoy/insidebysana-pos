@@ -68,7 +68,7 @@ const ProductCard: React.FC<ProductCardProps> = ({product}) => {
             <div className={styles.details}>
                 <div className={styles.title}>{product.title}</div>
                 {product.discount && <div className={styles.priceDiscount}>{formatPrice(product.price)} сум</div>}
-                <div className="price">{formatPrice(product.price, product.discount)} сум</div>
+                <div className={styles.price}>{formatPrice(product.price, product.discount)} сум</div>
             </div>
             <div className={styles.sizesAction}>
                 <Radio.Group onChange={onChangeHandler} size="large" value={selectSize?.size_id || null}>
