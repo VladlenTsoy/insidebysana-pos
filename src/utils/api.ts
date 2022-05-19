@@ -17,7 +17,7 @@ export const api = {
         withCredentials: true
     }),
     user: axios.create({
-        baseURL: DOMAIN_API + "user",
+        baseURL: DOMAIN_API + "/user/",
         headers: {Authorization: "Bearer " + TOKEN},
         withCredentials: true
     })
