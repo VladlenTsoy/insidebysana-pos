@@ -1,9 +1,8 @@
 import {DeleteOutlined, MinusOutlined, PlusOutlined, StopOutlined} from "@ant-design/icons"
-import PriceBlock from "components/blocks/price-block/PriceBlock"
+import PriceBlock from "components/price-block/PriceBlock"
 import {useDispatch} from "../../store"
 import React, {useCallback} from "react"
 import {updateQtyAdditionalService, removeAdditionalService} from "../cart/cartSlice"
-import "./CartAdditionalServiceItem.less"
 
 interface PlusMinusInputProps {
     id: number

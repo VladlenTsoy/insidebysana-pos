@@ -13,8 +13,3 @@ export const formatPrice = (price: number | string, discount?: any | number): st
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
 }
-
-export const checkDiscount = (price: number, discount?: any): number => {
-    if (discount) return Math.round(price - (price / 100) * discount.discount)
-    return price
-}

@@ -1,10 +1,12 @@
 import {Form, Input} from "antd"
 import {Client} from "types/Client"
-import LoadingBlock from "components/blocks/loading-block/LoadingBlock"
+import LoadingBlock from "components/loading-block/LoadingBlock"
 import React, {useEffect, useState} from "react"
-import {apiRequest} from "utils/api"
 import {formatPhone} from "utils/formatPhone"
-import "./SearchClientInput.less"
+import styles from "./SearchClientInput.module.less"
+import {useClients, useIsLoadingClients} from "./clientSlice"
+import {useDispatch} from "store"
+import {fetchClients} from "./fetchClients"
 
 interface SearchClientInputProps {
     updateSelectClient: (client: Client | null) => void
@@ -12,10 +14,11 @@ interface SearchClientInputProps {
 }
 
 const SearchClientInput: React.FC<SearchClientInputProps> = ({updateSelectClient, selectClient}) => {
-    const [clients, setClients] = useState<Client[]>([])
+    const clients = useClients()
+    const isLoading = useIsLoadingClients()
+    const dispatch = useDispatch()
     let timeout: any
     const [search, setSearch] = useState<string>("")
-    const [loading, setLoading] = useState(false)
 
     const onChangeHandler = (e: any) => {
         if (timeout) clearTimeout(timeout)
@@ -33,25 +36,15 @@ const SearchClientInput: React.FC<SearchClientInputProps> = ({updateSelectClient
 
     useEffect(() => {
         if (search.trim() !== "") {
-            setLoading(true)
-            ;(async () => {
-                try {
-                    const response = await apiRequest("post", "cashier/clients", {
-                        data: {search}
-                    })
-                    setClients(response)
-                    setLoading(false)
-                } catch (e) {
-                    console.error(e)
-                    setClients([])
-                    setLoading(false)
-                }
-            })()
+            const promise = dispatch(fetchClients(search))
+            return () => {
+                promise.abort()
+            }
         }
-    }, [search, updateSelectClient, selectClient])
+    }, [search, dispatch])
 
     return (
-        <div className="wrapper-search-client-input">
+        <div className={styles.searchClientInput}>
             <Form.Item label="Номер телефона" name="phone">
                 <Input
                     onChange={onChangeHandler}
@@ -59,14 +52,14 @@ const SearchClientInput: React.FC<SearchClientInputProps> = ({updateSelectClient
                     style={{width: "100%"}}
                 />
             </Form.Item>
-            {!selectClient && (!!clients.length || loading) && (
-                <div className="dropdown-clients">
-                    {loading ? (
+            {!selectClient && (!!clients.length || isLoading) && (
+                <div className={styles.dropdownClients}>
+                    {isLoading ? (
                         <LoadingBlock />
                     ) : (
                         clients.map(client => (
                             <div
-                                className="dropdown-client"
+                                className={styles.dropdownClient}
                                 key={client.id}
                                 onClick={() => onSelectHandler(client)}
                             >

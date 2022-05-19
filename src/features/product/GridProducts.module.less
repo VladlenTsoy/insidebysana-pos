@@ -1,0 +1,76 @@
+.searchContainer {
+  overflow-y: auto;
+  padding: 1rem;
+  position: relative;
+
+  .loadingFirst {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 30px;
+
+    :global .anticon {
+      font-size: 50px;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .productsContainer {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  @media (max-width: 1600px) {
+    .productsContainer {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .productsContainer {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .productsContainer {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .productsContainer {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .loadingPagination {
+    padding: 1rem;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    background: @component-background;
+    border-radius: 20px;
+
+    :global .anticon {
+      font-size: 50px;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}

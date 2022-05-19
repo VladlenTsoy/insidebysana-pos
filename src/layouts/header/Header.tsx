@@ -13,14 +13,18 @@ const MenuSidebar: React.FC = () => {
     const {pathname} = useLocation()
 
     const menu = (
-        <Menu selectedKeys={[pathname]}>
-            <Menu.Item className="account-item" icon={<SkinFilled />} key="/">
-                <Link to="/">Товары</Link>
-            </Menu.Item>
-            <Menu.Item className="account-item" icon={<DollarCircleFilled />} key="/orders">
-                <Link to="/orders">Сделки</Link>
-            </Menu.Item>
-        </Menu>
+        <Menu
+            items={[
+                {key: "/", label: <Link to="/">Товары</Link>, className: "account-item", icon: <SkinFilled />},
+                {
+                    key: "/orders",
+                    label: <Link to="/orders">Сделки</Link>,
+                    className: "account-item",
+                    icon: <DollarCircleFilled />
+                }
+            ]}
+            selectedKeys={[pathname]}
+        />
     )
 
     return (

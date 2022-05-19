@@ -6,6 +6,9 @@ import {CloseOutlined, EditOutlined, UserOutlined} from "@ant-design/icons"
 import {Button, Form, Input} from "antd"
 import Modal from "antd/lib/modal/Modal"
 import {formatPhone} from "utils/formatPhone"
+import {clearClients} from "./search-client-input/clientSlice"
+import {useDispatch} from "store"
+
 interface ClientSearchFormProps {
     updateSelectClient: (client: Client | null) => void
     selectClient: Client | null
@@ -50,8 +53,13 @@ interface ClientSearchProps {
 
 const ClientSearch: React.FC<ClientSearchProps> = ({selectClient, updateSelectClient}) => {
     const [visible, setVisible] = useState(false)
+    const dispatch = useDispatch()
 
-    const close = useCallback(() => setVisible(false), [])
+    const close = useCallback(() => {
+        dispatch(clearClients())
+        setVisible(false)
+    }, [dispatch])
+
     const handleClick = () => setVisible(true)
 
     const clickCancelHandler = () => updateSelectClient(null)

@@ -1,11 +1,11 @@
-import React, {useState} from "react"
-import "./Auth.less"
-import {Typography, Card, Form, Input, Button, Checkbox} from "antd"
-import {UserOutlined, LockOutlined, LoginOutlined} from "@ant-design/icons"
-import {Link} from "react-router-dom"
-import {useDispatch} from "react-redux"
+import React from "react"
+import styles from "./Auth.module.less"
+import {Button, Card, Checkbox, Form, Input, Typography} from "antd"
+import {LockOutlined, LoginOutlined, UserOutlined} from "@ant-design/icons"
 import {authUser} from "./authApi"
 import {emailRules, passwordRules} from "utils/formRules"
+import {useDispatch} from "store"
+import {useUser} from "./authSlice"
 
 const {Title} = Typography
 
@@ -15,20 +15,17 @@ interface ValuesProps {
 }
 
 const Auth = () => {
-    const [loading, setLoading] = useState(false)
+    const {isAuthLoading} = useUser()
     const dispatch = useDispatch()
 
     const onFinishHandler = async (values: ValuesProps) => {
-        setLoading(true)
-        // @ts-ignore
-        await dispatch(authUser(values))
-        setLoading(false)
+        dispatch(authUser(values))
     }
 
     return (
-        <div className="auth-login">
+        <div className={styles.wrapper}>
             <Card
-                className="card-login"
+                className={styles.card}
                 title={
                     <Title level={3} title="Авторизация">
                         Авторизация
@@ -46,15 +43,12 @@ const Auth = () => {
                         <Form.Item name="remember" valuePropName="checked" noStyle>
                             <Checkbox>Запомнить меня</Checkbox>
                         </Form.Item>
-                        <Link className="link-forgot" to="/">
-                            Забыли пароль?
-                        </Link>
                     </Form.Item>
                     <Button
                         type="primary"
                         size="large"
                         block
-                        loading={loading}
+                        loading={isAuthLoading}
                         htmlType="submit"
                         icon={<LoginOutlined />}
                     >

@@ -1,19 +1,19 @@
 import React, {useEffect} from "react"
 import "./App.less"
 import {useDispatch} from "./store"
-import Loader from "components/blocks/loader/Loader"
+import Loader from "components/loader/Loader"
 import {useUser} from "auth/authSlice"
 import {Route, Routes} from "react-router-dom"
 import {fetchUser} from "auth/authApi"
 import Layout from "./layouts/Layout"
-import LoadingBlock from "components/blocks/loading-block/LoadingBlock"
+import LoadingBlock from "components/loading-block/LoadingBlock"
 
 const Auth = React.lazy(() => import("./auth/Auth"))
 const Home = React.lazy(() => import("./pages/Home"))
 const Orders = React.lazy(() => import("./pages/Orders"))
 
 const Routers: React.FC = () => {
-    const {detail, token, loading} = useUser()
+    const {detail, token, isFetchLoading} = useUser()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Routers: React.FC = () => {
         }
     }, [dispatch, token])
 
-    if (!!token && loading) return <Loader text="Загрузка доступа..." />
+    if (!!token && isFetchLoading) return <Loader text="Загрузка доступа..." />
     return (
         <React.Suspense fallback={<Loader text="Загрузка доступа..." />}>
             {detail ? (

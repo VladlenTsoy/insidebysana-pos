@@ -1,5 +1,5 @@
 import {createApi} from "@reduxjs/toolkit/query/react"
-import {OrderTableColumn} from "components/blocks/orders-table-block/OrderTableColumn"
+import {OrderTableColumn} from "features/order/OrderTableColumn"
 import {Client} from "types/Client"
 import {ProductColor} from "types/product/ProductColor"
 import {Size} from "types/Size"

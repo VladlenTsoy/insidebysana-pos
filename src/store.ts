@@ -8,6 +8,7 @@ import {paymentMethodApi} from "features/order/orders-list/paymentMethodsApi"
 import product from "./features/product/productSlice"
 import cart from "./features/cart/cartSlice"
 import auth from "./auth/authSlice"
+import client from "features/order/create-order/create-order-form/search-client-input/clientSlice"
 import {setupListeners} from "@reduxjs/toolkit/query"
 
 export const store = configureStore({
@@ -19,7 +20,8 @@ export const store = configureStore({
         [paymentMethodApi.reducerPath]: paymentMethodApi.reducer,
         auth,
         cart,
-        product
+        product,
+        client
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({immutableCheck: false})

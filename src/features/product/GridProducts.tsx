@@ -1,9 +1,9 @@
 import {Empty, Spin} from "antd"
 import React, {useEffect} from "react"
 import {useGetParamsProduct, useProductColors} from "features/product/productSlice"
-import "./GridProducts.less"
-import {motion} from "framer-motion"
-import {useDispatch} from "../../store"
+import styles from "./GridProducts.module.less"
+import {motion, AnimatePresence} from "framer-motion"
+import {useDispatch} from "store"
 import ProductCard from "./ProductCard"
 import {fetchProductColorBySearch} from "./fetchProductColorBySearch"
 import {LoadingOutlined} from "@ant-design/icons"
@@ -34,17 +34,17 @@ const GridProducts: React.FC = () => {
     }, [dispatch, sizeId, categoryId, search])
 
     return (
-        <div className="search-container" onScroll={onScrollHandler}>
-            <>
+        <div className={styles.searchContainer} onScroll={onScrollHandler}>
+            <AnimatePresence>
                 {currentPage === 0 && loading && (
                     <motion.div
                         animate={{opacity: 1}}
                         initial={{opacity: 0}}
                         exit={{opacity: 0}}
-                        transition={{duration: 0.5}}
+                        transition={{duration: 0.015}}
                         key="loading-first"
                     >
-                        <div className="loading-first">
+                        <div className={styles.loadingFirst}>
                             <Spin indicator={<LoadingOutlined style={{marginBottom: "1rem"}} />} />
                             <p>Загрузка...</p>
                         </div>
@@ -55,7 +55,7 @@ const GridProducts: React.FC = () => {
                         animate={{opacity: 1}}
                         initial={{opacity: 0}}
                         exit={{opacity: 0}}
-                        transition={{duration: 0.5}}
+                        transition={{duration: 0.015}}
                         key="empty"
                     >
                         <Empty />
@@ -65,21 +65,21 @@ const GridProducts: React.FC = () => {
                     <motion.div
                         id="grid-products-list"
                         key="grid-products"
-                        className="products-container"
+                        className={styles.productsContainer}
                         animate="visible"
                         initial="hidden"
                         exit="exit"
                         variants={{
                             visible: {
                                 transition: {
-                                    delayChildren: 0.05,
-                                    staggerChildren: 0.05
+                                    delayChildren: 0.015,
+                                    staggerChildren: 0.015
                                 }
                             },
                             exit: {
                                 transition: {
-                                    delayChildren: 0.05,
-                                    staggerChildren: 0.05,
+                                    delayChildren: 0.015,
+                                    staggerChildren: 0.015,
                                     repeatType: "reverse"
                                 }
                             }
@@ -95,16 +95,16 @@ const GridProducts: React.FC = () => {
                         animate={{opacity: 1}}
                         initial={{opacity: 0}}
                         exit={{opacity: 0}}
-                        transition={{duration: 0.5}}
+                        transition={{duration: 0.015}}
                         key="loading-pagination"
                     >
-                        <div className="loading-pagination">
+                        <div className={styles.loadingPagination}>
                             <Spin indicator={<LoadingOutlined />} />
                             <p>Загрузка...</p>
                         </div>
                     </motion.div>
                 )}
-            </>
+            </AnimatePresence>
         </div>
     )
 }

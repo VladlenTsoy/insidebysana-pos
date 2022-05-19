@@ -31,11 +31,6 @@ export const fetchProductColorBySearch = createAsyncThunk<ReturnedType, AgrsProp
             body: JSON.stringify({search, categoryId, sizeId, currentPage, limit}),
             signal
         })
-
-        // return await apiRequest("post", `cashier/search-products`, {
-        //     data: {search, categoryId, sizeId, currentPage, limit},
-        //     signal
-        // })
     },
     {
         condition: (_, {getState}) => {

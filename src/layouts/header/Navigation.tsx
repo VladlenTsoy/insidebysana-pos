@@ -41,17 +41,16 @@ const Navigation: React.FC = () => {
     }
 
     const menu = (
-        <Menu>
-            <Menu.Item
-                className="account-item"
-                danger
-                icon={<PoweroffOutlined />}
-                key="/logout"
-                onClick={logout}
-            >
-                Выйти
-            </Menu.Item>
-        </Menu>
+        <Menu items={[
+            {
+                key: "/logout",
+                className: "account-item",
+                icon: <PoweroffOutlined />,
+                onClick: logout,
+                label: "Выйти",
+                danger: true
+            }
+        ]} />
     )
 
     return (

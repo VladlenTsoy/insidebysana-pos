@@ -1,0 +1,118 @@
+.productCard {
+  background-color: @white;
+  border-radius: 10px;
+  padding: 0.5rem;
+
+  &.active {
+    box-shadow: 0 0 15px 2px fade(@primary-color, 85);
+  }
+
+  .thumbnail {
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 0.5rem;
+    color: @black;
+    background: #efefef;
+
+    .color {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: @white;
+      padding: 0 0.5rem 0 0;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      color: @black;
+      z-index: 1;
+
+      .hex {
+        opacity: 0.8;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 0.35rem;
+        transform: scale(1.1);
+      }
+    }
+
+    .discount {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 0 0.5rem 0 0.5rem;
+      border-radius: 10px;
+      background: @primary-color;
+      color: @white !important;
+      z-index: 1;
+    }
+  }
+
+  .details {
+    text-align: center;
+
+    .title {
+      font-size: @font-size-lg;
+      line-height: 1.2;
+      color: @black;
+      margin-bottom: 0.5rem;
+    }
+
+    .priceDiscount {
+      color: fade(@black, 40%);
+      font-size: @font-size-sm;
+      text-decoration: line-through;
+      line-height: 1;
+    }
+
+    .price {
+      margin-bottom: 0.75rem;
+      font-weight: bold;
+      color: @black;
+      line-height: 1;
+    }
+  }
+
+  .sizesAction {
+    text-align: center;
+
+    &:global.ant-radio-button-wrapper:not(:first-child)::before {
+      content: none;
+    }
+
+    &:global.ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper:first-child {
+      border-color: transparent;
+    }
+
+    .buttonSize {
+      position: relative;
+      background-color: @success-color;
+      border-radius: 20px;
+      box-shadow: none;
+
+      &:first-child:last-child {
+        border-radius: 20px;
+      }
+
+      &:not(:last-child) {
+        margin-right: 0.5rem;
+      }
+
+      &:global.ant-radio-button-wrapper-checked {
+        border-color: transparent;
+        background: @primary-color;
+
+        &::before {
+          content: none;
+        }
+      }
+
+      span {
+        color: @white !important;
+      }
+    }
+  }
+}

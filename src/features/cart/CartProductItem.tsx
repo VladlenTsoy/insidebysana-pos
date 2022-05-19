@@ -4,7 +4,7 @@ import {addToCart, removeFromCart, updateQty} from "features/cart/cartSlice"
 import {useDispatch} from "../../store"
 import {CartProductItemType} from "features/cart/cart"
 import {ProductCardType} from "features/product/product"
-import PriceBlock from "components/blocks/price-block/PriceBlock"
+import PriceBlock from "components/price-block/PriceBlock"
 import {DeleteOutlined, MinusOutlined, PlusOutlined, StopOutlined} from "@ant-design/icons"
 import "./CartProductItem.less"
 

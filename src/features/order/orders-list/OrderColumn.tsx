@@ -1,9 +1,9 @@
 import {CheckCircleFilled} from "@ant-design/icons"
-import PriceBlock from "components/blocks/price-block/PriceBlock"
+import PriceBlock from "components/price-block/PriceBlock"
 import React from "react"
 import {formatDate} from "utils/formatDate"
 import {formatPrice} from "utils/formatPrice"
-import {OrderTableColumn} from "./OrderTableColumn"
+import {OrderTableColumn} from "../OrderTableColumn"
 
 interface OrderColumnProps {
     order: OrderTableColumn

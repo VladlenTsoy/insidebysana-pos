@@ -8,20 +8,23 @@ import {useSelector} from "react-redux"
 
 interface StateProps {
     token: string | null
-    loading: boolean
+    isFetchLoading: boolean
+    isAuthLoading: boolean
     detail: User | null
 }
 
 const initialState: StateProps = {
     token: getCookie("crm_token_access") || null,
     detail: null,
-    loading: true
+    isFetchLoading: false,
+    isAuthLoading: false
 }
 
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        // Изменить токен
         changeToken: (state, action: PayloadAction<string | null>) => {
             state.token = action.payload
             updateToken(action.payload)
@@ -31,29 +34,36 @@ const authSlice = createSlice({
     extraReducers: builder => {
         // Вывод пользователя
         builder.addCase(fetchUser.pending, state => {
-            state.loading = true
+            state.isFetchLoading = true
         })
         builder.addCase(fetchUser.fulfilled, (state, action) => {
             state.detail = action.payload
-            state.loading = false
+            state.isFetchLoading = false
         })
         builder.addCase(fetchUser.rejected, state => {
-            state.loading = false
+            state.isFetchLoading = false
         })
         // Авторизация пользователя
+        builder.addCase(authUser.pending, state => {
+            state.isAuthLoading = true
+        })
         builder.addCase(authUser.fulfilled, (state, action) => {
             state.token = action.payload.token
+            state.isAuthLoading = false
             updateToken(action.payload.token)
+        })
+        builder.addCase(authUser.rejected, state => {
+            state.isAuthLoading = false
         })
         // Выход пользователя
         builder.addCase(logoutUser.pending, state => {
-            state.loading = true
+            state.isFetchLoading = true
         })
         builder.addCase(logoutUser.fulfilled, state => {
             updateToken(null)
             state.token = null
             state.detail = null
-            state.loading = false
+            state.isFetchLoading = false
         })
     }
 })

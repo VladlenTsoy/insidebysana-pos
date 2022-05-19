@@ -30,13 +30,13 @@ const productSlice = createSlice({
     name: "product",
     initialState,
     reducers: {
-        // Изменить Категорию для фильтации
+        // Изменить категорию для, фильтрации
         changeCategoryId: (state, action: PayloadAction<StateProps["categoryId"]>) => {
             state.categoryId = action.payload
             state.pagination = initialState.pagination
             productAdapter.removeAll(state)
         },
-        // Изменить Размер для фильтрации
+        // Изменить размер для фильтрации
         changeSizeId: (state, action: PayloadAction<StateProps["sizeId"]>) => {
             state.sizeId = action.payload
             state.pagination = initialState.pagination
@@ -47,10 +47,12 @@ const productSlice = createSlice({
             state,
             action: PayloadAction<{categoryId: StateProps["categoryId"]; sizeId: StateProps["sizeId"]}>
         ) => {
-            state.categoryId = action.payload.categoryId
-            state.sizeId = action.payload.sizeId
-            state.pagination = initialState.pagination
-            productAdapter.removeAll(state)
+            if (state.categoryId !== 0 || state.sizeId !== 0) {
+                state.categoryId = action.payload.categoryId
+                state.sizeId = action.payload.sizeId
+                state.pagination = initialState.pagination
+                productAdapter.removeAll(state)
+            }
         },
         // Изменения пагинации
         changeCurrentPage: (state, action: PayloadAction<StateProps["pagination"]["currentPage"]>) => {
@@ -85,7 +87,6 @@ export const {
     changeCategoryId,
     changeSizeId,
     resetCategoryIdAndSizeId,
-    changeCurrentPage,
     changeSearch
 } = productSlice.actions
 

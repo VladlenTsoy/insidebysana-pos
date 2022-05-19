@@ -55,8 +55,7 @@ module.exports = {
                         javascriptEnabled: true,
                         modifyVars: {
                             ...getThemeVariables({dark: true}),
-                            "@font-family":
-                                "-apple-system, Montserrat, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                            "@font-family": "-apple-system, Montserrat, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
                             // background
                             "@popover-background": "#010b24",
                             "@component-background": "#010b24",

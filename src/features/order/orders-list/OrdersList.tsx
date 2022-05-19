@@ -5,7 +5,7 @@ import {useGetPaymentMethodQuery} from "./paymentMethodsApi"
 import "./OrdersList.less"
 import OrderColumn from "./OrderColumn"
 import {formatPrice} from "utils/formatPrice"
-import LoadingBlock from "components/blocks/loading-block/LoadingBlock"
+import LoadingBlock from "components/loading-block/LoadingBlock"
 
 const {Text} = Typography
 

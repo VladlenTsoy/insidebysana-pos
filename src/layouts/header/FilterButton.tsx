@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import {CheckOutlined, FilterOutlined} from "@ant-design/icons"
 import {Button, Drawer} from "antd"
-import LoadingBlock from "components/blocks/loading-block/LoadingBlock"
+import LoadingBlock from "components/loading-block/LoadingBlock"
 import {
     changeCategoryId,
     changeSizeId,
@@ -75,6 +75,7 @@ const FilterButton: React.FC = () => {
                 Фильтрация
             </Button>
             <Drawer
+                headerStyle={{display: "none"}}
                 closeIcon={false}
                 visible={visible}
                 onClose={closeHandler}
@@ -94,7 +95,7 @@ const FilterButton: React.FC = () => {
                                         styles.filterItemAll,
                                         {
                                             [styles.filterItemActive]:
-                                                categoryId === 0
+                                            categoryId === 0
                                         }
                                     )}
                                     onClick={() => changeCategoryHandler(0)}
@@ -106,15 +107,7 @@ const FilterButton: React.FC = () => {
                                             </MotionCheckAnimation>
                                         )}
                                         <motion.span
-                                            animate={
-                                                categoryId === 0
-                                                    ? {
-                                                          x: 20,
-                                                          width:
-                                                              "calc(100% - 20px)"
-                                                      }
-                                                    : {x: 0, width: "100%"}
-                                            }
+                                            animate={categoryId === 0 ? {x: 20, width: "calc(100% - 20px)"} : {x: 0, width: "100%"}}
                                             key="title"
                                         >
                                             Все
@@ -138,8 +131,8 @@ const FilterButton: React.FC = () => {
                                                             styles.filterItem,
                                                             {
                                                                 [styles.filterItemActive]:
-                                                                    categoryId ===
-                                                                    sub.id
+                                                                categoryId ===
+                                                                sub.id
                                                             }
                                                         )}
                                                         key={sub.id}
@@ -152,24 +145,24 @@ const FilterButton: React.FC = () => {
                                                         <AnimatePresence>
                                                             {categoryId ===
                                                                 sub.id && (
-                                                                <MotionCheckAnimation>
-                                                                    <CheckOutlined />
-                                                                </MotionCheckAnimation>
-                                                            )}
+                                                                    <MotionCheckAnimation>
+                                                                        <CheckOutlined />
+                                                                    </MotionCheckAnimation>
+                                                                )}
                                                             <motion.span
                                                                 animate={
                                                                     categoryId ===
                                                                     sub.id
                                                                         ? {
-                                                                              x: 20,
-                                                                              width:
-                                                                                  "calc(100% - 20px)"
-                                                                          }
+                                                                            x: 20,
+                                                                            width:
+                                                                                "calc(100% - 20px)"
+                                                                        }
                                                                         : {
-                                                                              x: 0,
-                                                                              width:
-                                                                                  "100%"
-                                                                          }
+                                                                            x: 0,
+                                                                            width:
+                                                                                "100%"
+                                                                        }
                                                                 }
                                                                 key="title"
                                                             >
@@ -190,7 +183,7 @@ const FilterButton: React.FC = () => {
                                         styles.filterItemAll,
                                         {
                                             [styles.filterItemActive]:
-                                                sizeId === 0
+                                            sizeId === 0
                                         }
                                     )}
                                     onClick={() => changeSizeHandler(0)}
@@ -205,10 +198,10 @@ const FilterButton: React.FC = () => {
                                             animate={
                                                 sizeId === 0
                                                     ? {
-                                                          x: 20,
-                                                          width:
-                                                              "calc(100% - 20px)"
-                                                      }
+                                                        x: 20,
+                                                        width:
+                                                            "calc(100% - 20px)"
+                                                    }
                                                     : {x: 0, width: "100%"}
                                             }
                                             key="title"
@@ -221,7 +214,7 @@ const FilterButton: React.FC = () => {
                                     <div
                                         className={cn(styles.filterItem, {
                                             [styles.filterItemActive]:
-                                                sizeId === size.id
+                                            sizeId === size.id
                                         })}
                                         key={size.id}
                                         onClick={() =>
@@ -237,10 +230,10 @@ const FilterButton: React.FC = () => {
                                             animate={
                                                 sizeId === size.id
                                                     ? {
-                                                          x: 20,
-                                                          width:
-                                                              "calc(100% - 20px)"
-                                                      }
+                                                        x: 20,
+                                                        width:
+                                                            "calc(100% - 20px)"
+                                                    }
                                                     : {x: 0, width: "100%"}
                                             }
                                             key="title"
