@@ -2,7 +2,6 @@ const CracoLessPlugin = require("craco-less")
 const rewireBabelLoader = require("craco-babel-loader")
 const BabelRcPlugin = require("@jackwilsdon/craco-use-babelrc")
 const interpolateHtml = require("craco-interpolate-html-plugin")
-const CompressionPlugin = require("compression-webpack-plugin")
 const {getThemeVariables} = require("antd/dist/theme")
 
 const isEnvProduction = process.env.NODE_ENV === "production"
@@ -55,7 +54,7 @@ module.exports = {
                         javascriptEnabled: true,
                         modifyVars: {
                             ...getThemeVariables({dark: true}),
-                            "@font-family": "-apple-system, Montserrat, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                            "@font-family": "Montserrat, -apple-system, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
                             // background
                             "@popover-background": "#010b24",
                             "@component-background": "#010b24",
