@@ -54,6 +54,9 @@ const ProductCard: React.FC<ProductCardProps> = ({product}) => {
                 {product.discount && (
                     <div className={styles.discount}>-{formatDiscount(product.discount.discount)}%</div>
                 )}
+                {product.storage &&
+                    <div className={styles.storage}>{product.storage.title}</div>
+                }
                 <ImageBlock image={product.url_thumbnail} />
                 <AnimatePresence>
                     {selectSize && (

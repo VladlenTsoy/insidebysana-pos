@@ -2,6 +2,10 @@ export interface ProductCardType {
     id: number
     title: string
     price: number
+    storage: {
+        id: number
+        title: string
+    } | null
     discount?: {
         discount: number
         end_at: string
