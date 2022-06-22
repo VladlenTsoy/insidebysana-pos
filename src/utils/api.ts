@@ -2,7 +2,7 @@ import {message} from "antd"
 import {removeCookie, setCookie} from "./cookie"
 
 export const DOMAIN_API =
-    process.env.NODE_ENV === "production" ? "https://insidebysana-api.herokuapp.com/api" : "http://localhost:9000/api"
+    process.env.NODE_ENV === "production" ? "https://api.insidebysana.uz/api" : "http://localhost:9000/api"
 
 const TOKEN_NAME = "crm_token_access"
 
