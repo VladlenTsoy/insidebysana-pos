@@ -1,8 +1,9 @@
 import {message} from "antd"
 import {removeCookie, setCookie} from "./cookie"
 
-export const DOMAIN_API =
-    process.env.NODE_ENV === "production" ? "https://api.insidebysana.uz/api" : "http://localhost:9000/api"
+if(!process.env.REACT_APP_DOMAIN) throw Error("Error REACT_APP_DOMAIN not find!")
+
+export const DOMAIN_API = `${process.env.REACT_APP_DOMAIN}/api`
 
 const TOKEN_NAME = "crm_token_access"
 
