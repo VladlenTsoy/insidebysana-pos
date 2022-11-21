@@ -1,10 +1,8 @@
 import {fetchBaseQuery} from "@reduxjs/toolkit/query/react"
+import {DOMAIN_API} from "./api"
 
 export default fetchBaseQuery({
-    baseUrl:
-        process.env.NODE_ENV === "production"
-            ? "https://api.insidebysana.uz/api"
-            : "http://localhost:9000/api",
+    baseUrl: DOMAIN_API,
     prepareHeaders: (headers, {getState}) => {
         // By default, if we have a token in the store, let's use that for authenticated requests
         try {
