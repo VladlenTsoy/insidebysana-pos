@@ -18,37 +18,16 @@ const plainOptions = [
 const Discount: React.FC = () => {
     const dispatch = useDispatch()
     const {discount} = useCartParams()
-    // const [typeDiscount, setTypeDiscount] = useState<"percent" | "fixed">(
-    //     discount ? discount.type : "percent"
-    // )
-    // const [valueDiscount, setValueDiscount] = useState(
-    //     discount.discount ? discount.discount : 0
-    // )
 
-    const onTypeChangeHandler = (e: any) => {
-        console.log(e.target.value)
-        dispatch(
-            setDiscount({type: e.target.value})
-        )
-    }
+    const onTypeChangeHandler = (e: any) =>
+        dispatch(setDiscount({type: e.target.value}))
 
     const onValueChangeHandler = (e: any) =>
-        dispatch(setDiscount({discount: e}))
+        dispatch(setDiscount({discount: e || 0}))
 
     const onCLickHandler = () => {
         dispatch(setDiscount({discount: 0, type: "percent"}))
-        dispatch(setDiscount({type: "percent", discount: 0}))
     }
-
-    // useEffect(() => {
-    //     if (discount.type === "percent" && discount.discount > 100)
-    //         dispatch(setDiscount({type: discount.type, discount: 100}))
-    //     if (discount.discount !== 0)
-    //         dispatch(
-    //             setDiscount({type: discount.type, discount: discount.discount})
-    //         )
-    //     else dispatch(setDiscount({type: "percent", discount: 0}))
-    // }, [dispatch, discount])
 
     return (
         <div className="create-order-discount">
