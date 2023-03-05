@@ -63,15 +63,16 @@ const productSlice = createSlice({
             state.search = action.payload
             state.pagination = initialState.pagination
         }
+
     },
     extraReducers: builder => {
         // Загрузка продуктов
         builder.addCase(fetchProductColorBySearch.pending, state => {
-            productAdapter.removeAll(state)
             state.loading = true
         })
         builder.addCase(fetchProductColorBySearch.fulfilled, (state, action) => {
-            const {currentPage = 0} = action.meta.arg
+            const {currentPage = 0, search} = action.meta.arg
+            if (search || currentPage === 0) productAdapter.removeAll(state)
             productAdapter.addMany(state, action.payload.results)
             state.pagination.currentPage = currentPage + 1
             state.pagination.total = action.payload.total
