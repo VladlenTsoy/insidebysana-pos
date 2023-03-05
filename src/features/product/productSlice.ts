@@ -62,12 +62,12 @@ const productSlice = createSlice({
         changeSearch: (state, action: PayloadAction<StateProps["search"]>) => {
             state.search = action.payload
             state.pagination = initialState.pagination
-            productAdapter.removeAll(state)
         }
     },
     extraReducers: builder => {
         // Загрузка продуктов
         builder.addCase(fetchProductColorBySearch.pending, state => {
+            productAdapter.removeAll(state)
             state.loading = true
         })
         builder.addCase(fetchProductColorBySearch.fulfilled, (state, action) => {
