@@ -4,7 +4,7 @@
   position: relative;
 
   .loadingFirst {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,6 +14,8 @@
     left: 0;
     right: 0;
     font-size: 30px;
+    z-index: 99;
+    background: rgb(1 11 36 / 60%);
 
     :global .anticon {
       font-size: 50px;
