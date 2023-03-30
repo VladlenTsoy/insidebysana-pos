@@ -11,6 +11,7 @@ export interface StateProps {
     categoryId: number
     sizeId: number
     search?: string
+    isScroll?: boolean,
     pagination: {
         currentPage: number
         limit: number
@@ -20,6 +21,7 @@ export interface StateProps {
 
 const initialState = productAdapter.getInitialState<StateProps>({
     loading: false,
+    isScroll: false,
     categoryId: 0,
     sizeId: 0,
     pagination: {currentPage: 0, limit: 18, total: 0},
@@ -67,12 +69,14 @@ const productSlice = createSlice({
     },
     extraReducers: builder => {
         // Загрузка продуктов
-        builder.addCase(fetchProductColorBySearch.pending, state => {
+        builder.addCase(fetchProductColorBySearch.pending, (state, action) => {
+            state.isScroll = action.meta.arg?.isScroll || false
+            state.search = action.meta.arg?.search || ""
             state.loading = true
         })
         builder.addCase(fetchProductColorBySearch.fulfilled, (state, action) => {
-            const {currentPage = 0, search} = action.meta.arg
-            if (search || currentPage === 0) productAdapter.removeAll(state)
+            const {currentPage = 0} = action.meta.arg
+            if (currentPage === 0) productAdapter.removeAll(state)
             productAdapter.addMany(state, action.payload.results)
             state.pagination.currentPage = currentPage + 1
             state.pagination.total = action.payload.total
@@ -88,7 +92,6 @@ export const {
     changeCategoryId,
     changeSizeId,
     resetCategoryIdAndSizeId,
-    changeSearch
 } = productSlice.actions
 
 export const {selectAll} = productAdapter.getSelectors<StoreState>(state => state.product)
