@@ -15,28 +15,29 @@ const GridProducts: React.FC = () => {
         categoryId,
         sizeId,
         search,
+        isScroll,
         pagination: {currentPage}
     } = useGetParamsProduct()
     const products = useProductColors()
 
     const onScrollHandler = (e: any) => {
         const {scrollTop, scrollHeight, clientHeight} = e.target
-        if (scrollTop + clientHeight >= scrollHeight - clientHeight && !loading) {
-            dispatch(fetchProductColorBySearch({search, categoryId, sizeId, currentPage}))
+        if (scrollTop + clientHeight - 100 >= scrollHeight - clientHeight && !loading) {
+            dispatch(fetchProductColorBySearch({search, categoryId, sizeId, currentPage, isScroll: true}))
         }
     }
 
     useEffect(() => {
-        const promise = dispatch(fetchProductColorBySearch({sizeId, categoryId, search}))
+        const promise = dispatch(fetchProductColorBySearch({sizeId, categoryId}))
         return () => {
             promise.abort()
         }
-    }, [dispatch, sizeId, categoryId, search])
+    }, [dispatch, sizeId, categoryId])
 
     return (
         <div className={styles.searchContainer} onScroll={onScrollHandler}>
             <AnimatePresence>
-                {currentPage === 0 && loading && (
+                {(!isScroll && loading) && (
                     <motion.div
                         animate={{opacity: 1}}
                         initial={{opacity: 0}}
@@ -90,7 +91,7 @@ const GridProducts: React.FC = () => {
                         ))}
                     </motion.div>
                 )}
-                {currentPage !== 0 && loading && (
+                {isScroll && loading && (
                     <motion.div
                         animate={{opacity: 1}}
                         initial={{opacity: 0}}

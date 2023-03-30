@@ -1,6 +1,6 @@
-import {SearchOutlined, SkinFilled, DollarCircleFilled} from "@ant-design/icons"
-import {Input, Dropdown, Menu} from "antd"
-import {changeSearch} from "features/product/productSlice"
+import {DollarCircleFilled, SearchOutlined, SkinFilled} from "@ant-design/icons"
+import {Dropdown, Input, Menu} from "antd"
+import {useGetParamsProduct} from "features/product/productSlice"
 import React from "react"
 import {Link, useLocation} from "react-router-dom"
 import {useDispatch} from "../../store"
@@ -8,6 +8,7 @@ import FilterButton from "./FilterButton"
 import styles from "./Header.module.less"
 import Navigation from "./Navigation"
 import logo from "assets/images/logo-2-white.svg"
+import {fetchProductColorBySearch} from "../../features/product/fetchProductColorBySearch"
 
 const MenuSidebar: React.FC = () => {
     const {pathname} = useLocation()
@@ -41,13 +42,11 @@ const MenuSidebar: React.FC = () => {
 
 const Header: React.FC = () => {
     const dispatch = useDispatch()
-    let timeout: any
+    const {categoryId, sizeId} = useGetParamsProduct()
 
-    const onChangeHandler = (e: any) => {
-        if (timeout) clearTimeout(timeout)
-        timeout = setTimeout(() => {
-            dispatch(changeSearch(e.target.value))
-        }, 500)
+    const onChangeHandler = (value: string) => {
+        document.getElementById("grid-products-list")?.scrollIntoView(true)
+        dispatch(fetchProductColorBySearch({sizeId, categoryId, search: value, currentPage: 0}))
     }
 
     return (
@@ -57,11 +56,12 @@ const Header: React.FC = () => {
                 <FilterButton />
             </div>
             <div className={styles.search}>
-                <Input
+                <Input.Search
                     suffix={<SearchOutlined />}
                     size="large"
-                    onChange={onChangeHandler}
+                    onSearch={onChangeHandler}
                     allowClear
+                    enterButton="Поиск"
                     placeholder="Введите SKU или название товара"
                 />
             </div>

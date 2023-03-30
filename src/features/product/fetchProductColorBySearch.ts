@@ -13,6 +13,7 @@ type AgrsProps = {
     categoryId?: number
     sizeId?: number
     currentPage?: number
+    isScroll?: boolean
 }
 
 export const fetchProductColorBySearch = createAsyncThunk<ReturnedType, AgrsProps, ThunkProps>(
@@ -33,10 +34,10 @@ export const fetchProductColorBySearch = createAsyncThunk<ReturnedType, AgrsProp
         })
     },
     {
-        condition: (_, {getState}) => {
+        condition: ({isScroll}, {getState}) => {
             const {product} = getState()
             return (
-                !product.loading &&
+                isScroll && !product.loading &&
                 (product.pagination.total === 0 || product.pagination.total > product.ids.length)
             )
         },
