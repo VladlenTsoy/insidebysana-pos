@@ -20,32 +20,38 @@ const paymentMethods = [
     {
         label: "Наличные",
         icon: CashImage,
-        payment_id: 3
+        payment_id: 3,
+        print_name: "Наличные"
     },
     {
         label: "Карта",
         icon: CreditCardImage,
-        payment_id: 5
+        payment_id: 5,
+        print_name: "Карта"
     },
     {
         label: "Payme",
         icon: PaymeImage,
-        payment_id: 1
+        payment_id: 1,
+        print_name: "Payme"
     },
     {
         label: "Uzum",
         icon: UzumImage,
-        payment_id: 4
+        payment_id: 4,
+        print_name: "Uzum"
     },
     {
         label: "Click",
         icon: ClickImage,
-        payment_id: 2
+        payment_id: 2,
+        print_name: "Click"
     },
     {
         label: "Оплата на карту 4248",
         icon: CreditCardImage,
-        payment_id: 6
+        payment_id: 6,
+        print_name: "Карта"
     }
 ]
 
