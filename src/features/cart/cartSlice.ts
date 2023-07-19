@@ -26,6 +26,7 @@ export interface StateProps {
         payment_id: number
         label: string
         price: number
+        print_name: string
     }[]
     payChange: number // Сдачи
     leftToPay: number // Осталось оплатить
@@ -45,7 +46,7 @@ const initialState = cartAdapter.getInitialState<StateProps>({
         discount: 0
     },
     additionalServices: [],
-    payments: [{payment_id: 3, label: "Наличные", price: 0}],
+    payments: [{payment_id: 3, label: "Наличные", price: 0, print_name: "Наличные"}],
     payChange: 0,
     leftToPay: 0,
     processing: false,
@@ -153,7 +154,7 @@ const cartSlice = createSlice({
             state.createOrderButton = {loading: false, disabled: true}
             state.clientSource = null
             state.clientSourceComment = undefined
-            state.payments = [{payment_id: 3, label: "Наличные", price: 0}]
+            state.payments = [{payment_id: 3, label: "Наличные", price: 0, print_name: "Наличные"}]
         },
         // Задать скидку
         setDiscount: (state, action: PayloadAction<{type?: StateProps["discount"]["type"], discount?: StateProps["discount"]["discount"]}>) => {

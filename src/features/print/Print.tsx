@@ -140,7 +140,7 @@ const Print: React.FC<PrintProps> = ({
                 </div>
                 {payments.map(payment => (
                     <div className="sub" key={payment.payment_id}>
-                        <div>{payment.label}:</div>
+                        <div>{payment.print_name}:</div>
                         <div>{formatPrice(payment.price)} сум</div>
                     </div>
                 ))}
