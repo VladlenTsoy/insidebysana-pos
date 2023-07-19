@@ -1,7 +1,7 @@
 import React from "react"
 import CashImage from "assets/images/payment/cash.svg"
 import PaymeImage from "assets/images/payment/payme.svg"
-import ApelsinImage from "assets/images/payment/apelsin.png"
+import UzumImage from "assets/images/payment/uzum.png"
 import CreditCardImage from "assets/images/payment/credit-card-payment.png"
 import ClickImage from "assets/images/payment/click.png"
 import {
@@ -33,14 +33,19 @@ const paymentMethods = [
         payment_id: 1
     },
     {
-        label: "Apelsin",
-        icon: ApelsinImage,
+        label: "Uzum",
+        icon: UzumImage,
         payment_id: 4
     },
     {
         label: "Click",
         icon: ClickImage,
         payment_id: 2
+    },
+    {
+        label: "Оплата на карту 4248",
+        icon: CreditCardImage,
+        payment_id: 6
     }
 ]
 
