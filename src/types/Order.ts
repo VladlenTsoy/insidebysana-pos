@@ -123,6 +123,7 @@ export interface OrderPayment {
     payment_id: number
     price: number
     label: string
+    print_name: string
 }
 
 export type OrderProduct = {
